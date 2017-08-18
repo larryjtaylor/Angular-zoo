@@ -6,11 +6,23 @@ import { Component } from '@angular/core';
   template: `
   <div class='container'>
   <h1>Zuckerman's Zany Zoo</h1>
+  <h1>Zoo inhabitants on {{month}}/{{day}}/{{year}}</h1>
+
+  <ul>
+    <li>{{firstAnimal.description}}</li>
+  </ul>
   </div>
   `
 })
 
 
 export class AppComponent {
+  currentTime = new Date();
+    month: number = this.currentTime.getMonth() + 1;
+    day: number = this.currentTime.getDate();
+    year: number = this.currentTime.getFullYear()
 
+    firstAnimal = {
+      description: "tiger"
+    }
 }
