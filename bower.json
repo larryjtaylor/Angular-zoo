@@ -1,0 +1,17 @@
+{
+  "name": "Angular-zoo",
+  "description": "Tracks the animals in a zoo by classifications",
+  "main": "",
+  "authors": [
+    "Larry <larryjamestaylor@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
