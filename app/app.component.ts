@@ -23,7 +23,7 @@ import { Component } from '@angular/core';
       </li>
     </ul>
     <hr>
-    <div>
+    <div *ngIf='selectedAnimal'>
       <h2>{{selectedAnimal.species}}</h2>
       <h3>Edit Animal</h3>
       <label>Enter Animal name:</label>
@@ -42,6 +42,7 @@ import { Component } from '@angular/core';
       <input [(ngModel)]="selectedAnimal.likes">
       <label>Enter Animal dislikes:</label>
       <input [(ngModel)]="selectedAnimal.dislikes">
+      <button (click)="finishedEditing()">Done</button>
    </div>
   </div>
   `
@@ -57,11 +58,15 @@ export class AppComponent {
   animals: Animal[] = [
     new Animal('Bengal Tiger', 'Shere Khan', 6, 'carnivore', 'southeast asian jungle', 3, 'male', 'intimidation', 'mancubs'),
     new Animal('Emperor Penguin', 'James Bond', 2, 'carnivore', 'antarctic', 1, 'female', 'sliding on ice', 'orcas') ];
-  selectedAnimal: Animal = this.animals[0];
+  selectedAnimal = null;
 
   editAnimal(clickedAnimal) {
     this.selectedAnimal = clickedAnimal;
   }
+  finishedEditing() {
+   this.selectedAnimal = null;
+ }
+
 }
 
 export class Animal {
