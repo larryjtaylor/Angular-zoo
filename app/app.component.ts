@@ -8,39 +8,25 @@ import { Animal } from './animal.model';
   <div class='container'>
     <h1>Zuckerman's Zany Zoo</h1>
     <h3>Zoo residents on {{month}}/{{day}}/{{year}}</h3>
-    <animal-list></animal-list>
+    <animal-list>[childAnimalList]="masterAnimalList" (clickSender)="editAnimal($event)"</animal-list>
     <hr>
-    <div *ngIf='selectedAnimal'>
-      <h2>{{selectedAnimal.species}}</h2>
-      <h3>Edit Animal</h3>
-      <label>Enter Animal name:</label>
-      <input [(ngModel)]="selectedAnimal.name">
-      <label>Enter Animal age:</label>
-      <input [(ngModel)]="selectedAnimal.age"><br>
-      <label>Enter Animal diet type:</label>
-      <input [(ngModel)]="selectedAnimal.diet">
-      <label>Enter Animal location in zoo:</label>
-      <input [(ngModel)]="selectedAnimal.location"><br>
-      <label>Enter number of caretakers needed:</label>
-      <input [(ngModel)]="selectedAnimal.caretakers">
-      <label>Enter Animal sex:</label>
-      <input [(ngModel)]="selectedAnimal.sex"><br>
-      <label>Enter Animal likes:</label>
-      <input [(ngModel)]="selectedAnimal.likes">
-      <label>Enter Animal dislikes:</label>
-      <input [(ngModel)]="selectedAnimal.dislikes">
-      <button (click)="finishedEditing()">Done</button>
-   </div>
+    <edit-animal>[childSelectedAnimal]="selectedAnimal"  (doneButtonClickedSender)="finishedEditing()"</edit-animal>
   </div>
   `
 })
 
-
 export class AppComponent {
+  currentFocus: string = 'Zoo Animals';
+
   currentTime = new Date();
   month: number = this.currentTime.getMonth() + 1;
   day: number = this.currentTime.getDate();
-  year: number = this.currentTime.getFullYear()
+  year: number = this.currentTime.getFullYear();
+
+  masterAnimalList: Animal[] = [
+    new Animal('Bengal Tiger', 'Shere Khan', 6, 'carnivore', 'southeast asian jungle', 3, 'male', 'intimidation', 'mancubs'),
+    new Animal('Emperor Penguin', 'James Bond', 2, 'carnivore', 'antarctic', 1, 'female', 'sliding on ice', 'orcas') ];
+
   selectedAnimal = null;
 
   editAnimal(clickedAnimal) {

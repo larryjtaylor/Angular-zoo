@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Animal } from './animal.model';
 
 @Component({
   selector: 'animal-list',
   template: `
   <ul>
-    <li *ngFor="let currentAnimal of animals">{{currentAnimal.species}} <button (click)="editAnimal(currentAnimal)">Edit Animal</button>
+    <li *ngFor="let currentAnimal of childAnimalList">{{currentAnimal.species}} <button (click)="editButtonHasBeenClicked(currentAnimal)">Edit Animal</button>
       <ul>
         <li>{{currentAnimal.name}}</li>
         <li>{{currentAnimal.age}} years old</li>
@@ -22,9 +22,10 @@ import { Animal } from './animal.model';
 })
 
 export class AnimalListComponent {
-  animals: Animal[] = [
-    new Animal('Bengal Tiger', 'Shere Khan', 6, 'carnivore', 'southeast asian jungle', 3, 'male', 'intimidation', 'mancubs'),
-    new Animal('Emperor Penguin', 'James Bond', 2, 'carnivore', 'antarctic', 1, 'female', 'sliding on ice', 'orcas') ];
+  @Input() childAnimalList: Animal[];
+  @Output() clickSender = new EventEmitter();
 
-
+  editButtonHasBeenClicked(animalToEdit: Animal) {
+     this.clickSender.emit(animalToEdit);
+   }
 }
