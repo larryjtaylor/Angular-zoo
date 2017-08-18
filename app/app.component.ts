@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Animal } from './animal.model';
 
 
 @Component({
@@ -7,21 +8,7 @@ import { Component } from '@angular/core';
   <div class='container'>
     <h1>Zuckerman's Zany Zoo</h1>
     <h3>Zoo residents on {{month}}/{{day}}/{{year}}</h3>
-
-    <ul>
-      <li *ngFor="let currentAnimal of animals">{{currentAnimal.species}} <button (click)="editAnimal(currentAnimal)">Edit Animal</button>
-        <ul>
-          <li>{{currentAnimal.name}}</li>
-          <li>{{currentAnimal.age}} years old</li>
-          <li>{{currentAnimal.diet}}</li>
-          <li>{{currentAnimal.location}}</li>
-          <li>{{currentAnimal.caretakers}} caretakers required</li>
-          <li>{{currentAnimal.sex}}</li>
-          <li>likes {{currentAnimal.likes}}</li>
-          <li>doesn't like {{currentAnimal.dislikes}}</li>
-        </ul>
-      </li>
-    </ul>
+    <animal-list></animal-list>
     <hr>
     <div *ngIf='selectedAnimal'>
       <h2>{{selectedAnimal.species}}</h2>
@@ -54,10 +41,6 @@ export class AppComponent {
   month: number = this.currentTime.getMonth() + 1;
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear()
-
-  animals: Animal[] = [
-    new Animal('Bengal Tiger', 'Shere Khan', 6, 'carnivore', 'southeast asian jungle', 3, 'male', 'intimidation', 'mancubs'),
-    new Animal('Emperor Penguin', 'James Bond', 2, 'carnivore', 'antarctic', 1, 'female', 'sliding on ice', 'orcas') ];
   selectedAnimal = null;
 
   editAnimal(clickedAnimal) {
@@ -65,10 +48,5 @@ export class AppComponent {
   }
   finishedEditing() {
    this.selectedAnimal = null;
- }
-
-}
-
-export class Animal {
-  constructor(public species: string, public name: string, public age: number, public diet: string, public location: string, public caretakers: number, public sex: string, public likes: string, public dislikes: string) { }
+  }
 }
